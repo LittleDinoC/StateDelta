@@ -103,10 +103,10 @@ def main(args):
     else:
         model, tokenizer, model_config = load_model(args.model_name_or_path, args.method)
         update_hidden_dim(model_config.hidden_size)
-        need_agent_cnt = 1 if args.method == "single" and args.task_type != "ia" else args.agent_cnt
+        need_agent_cnt = args.agent_cnt
         agents = []
         for idx in range(need_agent_cnt):
-            if args.method == "single" or args.method == "nl": 
+            if args.method == "nl": 
                 agent_cls = NlAgent
             elif args.method == "cipher":
                 agent_cls = CipherAgent
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     parser.add_argument("--model_name_or_path", type=str, required=True)
     parser.add_argument("--dataset", type=str, required=True)
     parser.add_argument("--sample", type=int)
-    parser.add_argument("--method", type=str, choices=["single", "nl", "cipher", "sde"], required=True)
+    parser.add_argument("--method", type=str, choices=["nl", "cipher", "sde"], required=True)
     parser.add_argument("--output_dir", type=str, default="output")
     parser.add_argument("--redo", action="store_true") # if True, do a new run
     
@@ -173,8 +173,7 @@ if __name__ == "__main__":
             with open(args.config_file, "r") as fin:
                 config = json.load(fin)
             if config["task_type"] == "workflow":
-                config["max_new_tokens"] = config["max_new_tokens_single"] if args.method == "single" else \
-                                        config["max_new_tokens_ma"]  
+                config["max_new_tokens"] = config["max_new_tokens_ma"]  
                 del config["max_new_tokens_single"]
                 del config["max_new_tokens_ma"]
             for k, v in config.items():

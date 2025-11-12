@@ -165,7 +165,7 @@ python -m src.main \
 | `config_file` | Path to config file. Options: `configs/ia.json`, `configs/debate.json`, `configs/workflow.json` |
 | `model_name_or_path` | Model to use, e.g., `Qwen/Qwen2.5-7B-Instruct`, `meta-llama/Llama-3.1-8B-Instruct`, `Qwen/Qwen2.5-14B-Instruct` |
 | `dataset` | IA tasks: `quasart`, `cwq`, `strategyqa`<br>debate tasks: `gsm8k`, `mmlu_college_mathematics`, `mmlu_abstract_algebra`, `mmlu_formal_logic`<br>workflow tasks: `hotpotqa`, `strategyqa`, `fever` |
-| `method` | our method: `sde`<br>or baselines: `single`, `nl`, `cipher` |
+| `method` | our method: `sde`<br>or baselines: `nl`, `cipher` |
 
 **Optional Parameters**
 
